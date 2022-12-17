@@ -17,14 +17,14 @@ namespace NapaProject.Controllers
         }
 
         [HttpPost("register"), AllowAnonymous]
-        public async Task<IActionResult> Registr([FromBody] UserCreateViewModel userCreateViewModel)
+        public async Task<IActionResult> Registr([FromForm] UserCreateViewModel userCreateViewModel)
         {
             await _acountService.RegisterAsync(userCreateViewModel);
             return Ok();
         }
 
         [HttpPost("login"), AllowAnonymous]
-        public async Task<IActionResult> LogIn([FromBody] UserCreateViewModel logInViewModel)
-            => Ok((new { Token = (await _acountService.LogInAsync(logInViewModel)) }));
+        public async Task<IActionResult> LogIn([FromForm] UserCreateViewModel logInViewModel)
+            => Ok((await _acountService.LogInAsync(logInViewModel)));
     }
 }
